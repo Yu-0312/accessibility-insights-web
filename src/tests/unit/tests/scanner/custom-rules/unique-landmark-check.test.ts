@@ -76,6 +76,23 @@ describe('axe.Check: unique-landmark', () => {
         });
     });
 
+    it('detects duplicate landmarks that share visually hidden aria-labelledby labels', () => {
+        fixture.innerHTML = `
+            <nav id="landmark1" aria-labelledby="nav-heading-1">
+                <h2 id="nav-heading-1" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Shared Nav Name</h2>
+                <a href="#">a</a>
+            </nav>
+            <nav id="landmark2" aria-labelledby="nav-heading-2">
+                <h2 id="nav-heading-2" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Shared Nav Name</h2>
+                <a href="#">b</a>
+            </nav>
+            `;
+        axe.setup(fixture);
+
+        expectCheckFalse(fixture.querySelector('#landmark1'));
+        expectCheckFalse(fixture.querySelector('#landmark2'));
+    });
+
     it('should exclude hidden landmarks for unique check', () => {
         fixture.innerHTML = `
             <div role="banner" id="landmark1" style="display:none">landmark1</div>
