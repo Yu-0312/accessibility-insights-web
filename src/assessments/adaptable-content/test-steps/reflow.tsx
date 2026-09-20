@@ -20,15 +20,14 @@ const reflowHowToTest: JSX.Element = (
         <ol>
             <li>
                 Use browser zoom so that the target page's CSS viewport is{' '}
-                <Markup.Emphasis>320 CSS pixels wide</Markup.Emphasis>. One way to do this on a
-                1280 x 1024 display is 400% zoom in full-screen mode (1280 / 4 = 320).
+                <Markup.Emphasis>320 CSS pixels wide</Markup.Emphasis>. One way to do this on a 1280
+                x 1024 display is 400% zoom in full-screen mode (1280 / 4 = 320).
                 <ul>
                     <li>
-                        WCAG 1.4.10 Reflow requires content to remain available without scrolling
-                        in two dimensions at 320 CSS pixels wide (for vertical scrolling content)
-                        or 256 CSS pixels high (for horizontal scrolling content). It does not
-                        require every UI chrome element to be redesigned for a 320 x 256 device
-                        layout.
+                        WCAG 1.4.10 Reflow requires content to remain available without scrolling in
+                        two dimensions at 320 CSS pixels wide (for vertical scrolling content) or
+                        256 CSS pixels high (for horizontal scrolling content). It does not require
+                        every UI chrome element to be redesigned for a 320 x 256 device layout.
                     </li>
                     <li>
                         If content scrolls horizontally, also check at a height equivalent to 256
