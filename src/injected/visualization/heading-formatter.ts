@@ -15,6 +15,11 @@ export interface StyleComputer {
     getComputedStyle(elt: Element, pseudoElt?: string): CSSStyleDeclaration;
 }
 
+interface HeadingScanData {
+    propertyBag?: { headingText?: string };
+    ruleResults?: Record<string, { any?: Array<{ data?: { headingText?: string } }> }>;
+}
+
 export class HeadingFormatter extends FailureInstanceFormatter {
     private styleComputer: StyleComputer;
 
@@ -125,13 +130,13 @@ export class HeadingFormatter extends FailureInstanceFormatter {
             return '';
         }
 
-        const propertyBagHeadingText = (data as { propertyBag?: { headingText?: string } })
-            .propertyBag?.headingText;
+        const scanData = data as Partial<HeadingScanData>;
+        const propertyBagHeadingText = scanData.propertyBag?.headingText;
         if (propertyBagHeadingText) {
             return propertyBagHeadingText;
         }
 
-        const ruleResults = (data as { ruleResults?: Record<string, any> }).ruleResults;
+        const ruleResults = scanData.ruleResults;
         if (ruleResults == null) {
             return '';
         }
@@ -142,8 +147,9 @@ export class HeadingFormatter extends FailureInstanceFormatter {
                 continue;
             }
             for (const check of checks) {
-                if (check?.data?.headingText) {
-                    return check.data.headingText as string;
+                const headingText = check?.data?.headingText;
+                if (typeof headingText === 'string' && headingText !== '') {
+                    return headingText;
                 }
             }
         }
