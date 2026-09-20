@@ -59,6 +59,23 @@ describe('axe.Check: unique-landmark', () => {
         });
     });
 
+    it('set label from aria-labelledby targeting visually hidden text', () => {
+        fixture.innerHTML = `
+            <nav id="landmark1" aria-labelledby="nav-heading">
+                <h2 id="nav-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Accessible Name for Nav</h2>
+                <ul><li><a href="#">Link</a></li></ul>
+            </nav>
+            `;
+        axe.setup(fixture);
+
+        const node = fixture.querySelector('#landmark1');
+        expectCheckTrue(node);
+        expect(checkContext._data).toEqual({
+            role: 'navigation',
+            label: 'accessible name for nav',
+        });
+    });
+
     it('should exclude hidden landmarks for unique check', () => {
         fixture.innerHTML = `
             <div role="banner" id="landmark1" style="display:none">landmark1</div>
