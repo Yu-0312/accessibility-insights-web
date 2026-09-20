@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 import { AdaptableContentTestStep } from 'assessments/adaptable-content/test-steps/test-step';
-import { NewTabLink } from 'common/components/new-tab-link';
 import * as Markup from 'assessments/markup';
 import { Requirement } from 'assessments/types/requirement';
+import { NewTabLink } from 'common/components/new-tab-link';
 import { link } from 'content/link';
 import * as content from 'content/test/adaptable-content/reflow';
 import * as React from 'react';
